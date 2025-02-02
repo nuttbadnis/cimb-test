@@ -2,21 +2,45 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(Q2("1.0", "1.0.0"));
+        try {
+            System.out.println(Q1(new int[]{7, 1, 5, 3, 6, 4}));
+            System.out.println(Q1(new int[]{7, 6, 4, 3, 1}));
+            System.out.println(Q2("1.0", "1.0.0"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
-    public static void Q1() {
+    public static int Q1(int[] prices) throws Exception {
+        int maxProfit = 0;
+        if (prices.length < 1 || prices.length > 100000) {
+            throw new Exception("Prices length must be between 1 and 100000.");
+        }
 
+        int minPrice = Integer.MAX_VALUE;
+
+        for (int price : prices) {
+            if (price < 0 || price > 100000) {
+                throw new Exception("Price must be between 0 and 100000.");
+            }
+
+            if (price < minPrice) {
+                minPrice = price;
+            } else {
+                maxProfit = Math.max(maxProfit, price - minPrice);
+            }
+        }
+        return maxProfit;
     }
 
-    public static int Q2(String version1, String version2) {
-
+    public static int Q2(String version1, String version2) throws Exception {
         if (version1.length() < 1 || version1.length() > 500 || version2.length() < 1 || version2.length() > 500) {
-            throw new IllegalArgumentException("Version lengths must be between 1 and 500 characters.");
+            throw new Exception("Version lengths must be between 1 and 500 characters.");
         }
 
         if (!version1.matches("\\d+(\\.\\d+)*") || !version2.matches("\\d+(\\.\\d+)*")) {
-            throw new IllegalArgumentException("Versions must contain only digits and dots.");
+            throw new Exception("Versions must contain only digits and dots.");
         }
 
         String[] v1 = version1.split("\\.");
@@ -27,10 +51,10 @@ public class Main {
             int num1 = 0;
             int num2 = 0;
 
-            if(i < v1.length){
+            if (i < v1.length) {
                 num1 = Integer.parseInt(v1[i]);
             }
-            if(i < v2.length){
+            if (i < v2.length) {
                 num2 = Integer.parseInt(v2[i]);
             }
 
@@ -40,11 +64,13 @@ public class Main {
                 return 1;
             }
         }
-
         return 0;
     }
 
-    public static int Q3(String version1, String version2){
-
+    public static int Q3(int n) throws Exception {
+        if (n < 1 || n > 45) {
+            throw new Exception("n must be between 1 and 45.");
+        }
+        return n;
     }
 }
