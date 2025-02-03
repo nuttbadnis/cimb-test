@@ -5,7 +5,12 @@ public class Main {
         try {
             System.out.println(Q1(new int[]{7, 1, 5, 3, 6, 4}));
             System.out.println(Q1(new int[]{7, 6, 4, 3, 1}));
+            System.out.println(Q2("1.01", "1.001"));
             System.out.println(Q2("1.0", "1.0.0"));
+            System.out.println(Q2("0.1", "1.1"));
+            System.out.println(Q3(2));
+            System.out.println(Q3(3));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -71,6 +76,20 @@ public class Main {
         if (n < 1 || n > 45) {
             throw new Exception("n must be between 1 and 45.");
         }
-        return n;
+        if(n == 1) {
+            return 1;
+        }
+
+        int firstStep = 1;
+        int secondStep = 2;
+
+        for (int i = 3; i <= n; i++) {
+            int thirdStep = firstStep + secondStep;
+            firstStep = secondStep;
+            secondStep = thirdStep;
+        }
+
+        return secondStep;
     }
 }
+
